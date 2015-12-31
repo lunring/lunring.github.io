@@ -55,12 +55,12 @@
 
 <meta name="description">
 <meta property="og:type" content="website">
-<meta property="og:title" content="林聪">
+<meta property="og:title" content="木木耳总">
 <meta property="og:url" content="http://lincong.cc/archives/2015/index.html">
-<meta property="og:site_name" content="林聪">
+<meta property="og:site_name" content="木木耳总">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="林聪">
+<meta name="twitter:title" content="木木耳总">
 <meta name="twitter:description">
 
 
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title> 归档 | 林聪 </title>
+  <title> 归档 | 木木耳总 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -114,11 +114,11 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">林聪</span>
+      <span class="site-title">木木耳总</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle"></p>
+  <p class="site-subtitle">人生苦短，莫虚度。</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -133,7 +133,7 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu menu-left">
       
         
         <li class="menu-item menu-item-home">
@@ -171,6 +171,16 @@
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form" >
+  <input type="text" id="ts-search-input" class="menu-search-input">
+</form>
+
+
+
+    </div>
   
 </nav>
 
@@ -322,22 +332,6 @@
                 </a>
               </span>
             
-              <span class="links-of-author-item">
-                <a href="http://www.douban.com/people/71014617/" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> DouBan
-                  
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/lunring" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> ZhiHu
-                  
-                </a>
-              </span>
-            
           
         </div>
 
@@ -387,6 +381,9 @@
     NexT.Mist
   </a>
 </div>
+
+ <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 
 
 
@@ -459,6 +456,28 @@
   <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
+  <script>
+    var customRenderActFunction = function(item) {
+      var out = '<p class="title">' + item['document']['title'].split(" // ")[0] + '</p>';
+      return out;
+    };
+    var option = {
+      engineKey: 'yourtinysou_engineKey',
+      renderActFunction: customRenderActFunction
+    };
+    (function(w,d,t,u,n,s,e){
+      s = d.createElement(t);
+      s.src = u;
+      s.async = 1;
+      w[n] = function(r){
+        w[n].opts = r;
+      };
+      e = d.getElementsByTagName(t)[0];
+      e.parentNode.insertBefore(s, e);
+    })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+    _ts(option);
+  </script>
+
   
 
   
