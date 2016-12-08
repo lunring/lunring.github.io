@@ -1,0 +1,633 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Mac10.11.5系统自带python2.7，我又安装了python3.5，在终端直接输入python会直接进入到2.7版本，进入Python3.5需要在终端输入Python3，执行py文件时也需要输入例如python3 hello.py。
+input()函数获取的键盘输入是字符串？刚开始写的代码如下
+123num1 = input(&apos;please enter the num1: &apos;)num2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 学习">
+<meta property="og:url" content="http://lincong.cc/2016/05/19/2016-05-19Python学习/index.html">
+<meta property="og:site_name" content="Lunring'Notes">
+<meta property="og:description" content="Mac10.11.5系统自带python2.7，我又安装了python3.5，在终端直接输入python会直接进入到2.7版本，进入Python3.5需要在终端输入Python3，执行py文件时也需要输入例如python3 hello.py。
+input()函数获取的键盘输入是字符串？刚开始写的代码如下
+123num1 = input(&apos;please enter the num1: &apos;)num2">
+<meta property="og:image" content="http://lincong.cc/img/2016-05-20 16-21-58.jpg">
+<meta property="og:updated_time" content="2016-05-24T07:28:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 学习">
+<meta name="twitter:description" content="Mac10.11.5系统自带python2.7，我又安装了python3.5，在终端直接输入python会直接进入到2.7版本，进入Python3.5需要在终端输入Python3，执行py文件时也需要输入例如python3 hello.py。
+input()函数获取的键盘输入是字符串？刚开始写的代码如下
+123num1 = input(&apos;please enter the num1: &apos;)num2">
+<meta name="twitter:image" content="http://lincong.cc/img/2016-05-20 16-21-58.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Python 学习 | Lunring'Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lunring'Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Moving</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python 学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-19T13:43:59+08:00" content="2016-05-19">
+              2016-05-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/19/2016-05-19Python学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/19/2016-05-19Python学习/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>Mac10.11.5系统自带python2.7，我又安装了python3.5，在终端直接输入python会直接进入到2.7版本，进入Python3.5需要在终端输入Python3，执行py文件时也需要输入例如python3 hello.py。</li>
+<li><p>input()函数获取的键盘输入是字符串？刚开始写的代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">num1 = input(<span class="string">'please enter the num1: '</span>)</div><div class="line">num2 = input(<span class="string">'please enter the num2: '</span>)</div><div class="line">print(<span class="string">'num1*num2= %d'</span> % (num1*num2))</div></pre></td></tr></table></figure>
+</li>
+<li><p>很奇怪，sublime text3安装了Anaconda后打开py文件异常卡顿，输入至少3秒以上延迟才有反应，打开其他文件则没有这个问题。  <strong>尝试卸载Anaconda插件，又能恢复正常。</strong> 没有Google到具体原因，只在知乎上看到有人说会增加耗电量和延迟，不过不知道是否跟我的卡顿程度一样。—-目前没有找到解决办法，暂时卸载了Anaconda插件，纳闷很多教程上都强烈推荐这个插件，难道都是能用的飞起没有问题的？(2016-05-21 14:28:04更新:在st3中卸载了Anaconda插件，使用了Git 重新安装后问题解决，参考网址<a href="http://damnwidget.github.io/anaconda/#using-anaconda" target="_blank" rel="external">http://damnwidget.github.io/anaconda/#using-anaconda</a>)</p>
+</li>
+<li>list  和 dict，在命令行里输入list变量</li>
+<li>Anaconda插件命令补全用的是jedi，但是补全功能总有2－3秒的延迟，试验两个插件共存，关闭Anaconda的补全功能，依旧如此，只能卸载掉Anaconda保留Jedi，也是无奈，网络上找到的全都是推荐安装Anaconda的，目前来说完全体验不到优势在哪。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">names = [&apos;Michael&apos;, &apos;Bob&apos;, &apos;Tracy&apos;]</div><div class="line">scores = [95, 75, 85]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>之后再输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d = &#123;&apos;Michael&apos;: 95, &apos;Bob&apos;: 75, &apos;Tracy&apos;: 85&#125;</div></pre></td></tr></table></figure></p>
+<p>会提示语法错误，反过来也一样，如下图所示，猜测应该是dict类型里的变量已经被占用了，不知道<strong>准确的</strong>该怎么描述这种情况。<br><img src="/img/2016-05-20 16-21-58.jpg" width="50%" height="50%"></p>
+<ul>
+<li>关于dict用空间换时间个人理解是因为需要开辟多个地址段，造成内存碎片？下面是饮用廖雪峰教程里的话:</li>
+</ul>
+<blockquote>
+<p>请务必注意，dict内部存放的顺序和key放入的顺序是没有关系的。</p>
+<p>和list比较，dict有以下几个特点：</p>
+<p>查找和插入的速度极快，不会随着key的增加而变慢；<br>   需要占用大量的内存，内存浪费多。<br>   而list相反：</p>
+<p>查找和插入的时间随着元素的增加而增加；<br>   占用空间小，浪费内存很少。<br>   所以，dict是用空间来换取时间的一种方法。</p>
+</blockquote>
+<h4 id="函数可以同时返回多个值，但其实就是一个tuple。"><a href="#函数可以同时返回多个值，但其实就是一个tuple。" class="headerlink" title="函数可以同时返回多个值，但其实就是一个tuple。"></a>函数可以同时返回多个值，但其实就是一个tuple。</h4><p>但是，在语法上，返回一个tuple可以省略括号，而多个变量可以同时接收一个tuple，按位置赋给对应的值，所以，Python的函数返回多值其实就是返回一个tuple，但写起来更方便。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="lunring wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎扫描二维码关注我的公众号，虽然暂时并没有什么内容！</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/19/2016-05-19安装ohmyzsh后ping命令找不到/" rel="next" title="oh my zsh与ping命令">
+                <i class="fa fa-chevron-left"></i> oh my zsh与ping命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/23/2016-05-23sublime text3插件anaconda问题/" rel="prev" title="关于sublime text3 安装anaconda插件导致py文件卡顿的原因">
+                关于sublime text3 安装anaconda插件导致py文件卡顿的原因 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/19/2016-05-19Python学习/"
+           data-title="Python 学习" data-url="http://lincong.cc/2016/05/19/2016-05-19Python学习/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xsxrc.com1.z0.glb.clouddn.com/avatar.png"
+               alt="lunring" />
+          <p class="site-author-name" itemprop="name">lunring</p>
+          <p class="site-description motion-element" itemprop="description">Life‘hard,play.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lunring" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/lunring" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数可以同时返回多个值，但其实就是一个tuple。"><span class="nav-number">1.</span> <span class="nav-text">函数可以同时返回多个值，但其实就是一个tuple。</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lunring</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lunring"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
