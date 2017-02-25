@@ -1,0 +1,613 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="LoRa、NB-IoT阶段工作汇报-开发一部 林聪
+LoRa、NB-IoT等LPWAN技术预研工作规划国内LPWAN技术推广力度较大的主要是LoRa和NB-IoT，其中LoRa又以中兴主导的CLAA联盟覆盖范围更广，NB-IoT则是以华为、中兴及三大运营商推动为主，我们结合这两种技术和汉威实际业务把预研工作分为三个阶段，第一段阶主要做LoRa、NB-IoT相关模组测试选型及厂家技术交流，筛选出支持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lunring'Notes">
+<meta property="og:url" content="http://lincong.cc/2016/12/29/2016-12-29关于lora工作的阶段汇报和反思/index.html">
+<meta property="og:site_name" content="Lunring'Notes">
+<meta property="og:description" content="LoRa、NB-IoT阶段工作汇报-开发一部 林聪
+LoRa、NB-IoT等LPWAN技术预研工作规划国内LPWAN技术推广力度较大的主要是LoRa和NB-IoT，其中LoRa又以中兴主导的CLAA联盟覆盖范围更广，NB-IoT则是以华为、中兴及三大运营商推动为主，我们结合这两种技术和汉威实际业务把预研工作分为三个阶段，第一段阶主要做LoRa、NB-IoT相关模组测试选型及厂家技术交流，筛选出支持">
+<meta property="og:updated_time" content="2017-02-25T06:56:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lunring'Notes">
+<meta name="twitter:description" content="LoRa、NB-IoT阶段工作汇报-开发一部 林聪
+LoRa、NB-IoT等LPWAN技术预研工作规划国内LPWAN技术推广力度较大的主要是LoRa和NB-IoT，其中LoRa又以中兴主导的CLAA联盟覆盖范围更广，NB-IoT则是以华为、中兴及三大运营商推动为主，我们结合这两种技术和汉威实际业务把预研工作分为三个阶段，第一段阶主要做LoRa、NB-IoT相关模组测试选型及厂家技术交流，筛选出支持">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title>  | Lunring'Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lunring'Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Moving</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-29T17:06:52+08:00" content="2016-12-29">
+              2016-12-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/29/2016-12-29关于lora工作的阶段汇报和反思/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/29/2016-12-29关于lora工作的阶段汇报和反思/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="LoRa、NB-IoT阶段工作汇报"><a href="#LoRa、NB-IoT阶段工作汇报" class="headerlink" title="LoRa、NB-IoT阶段工作汇报"></a>LoRa、NB-IoT阶段工作汇报</h2><p>-开发一部 林聪</p>
+<h2 id="LoRa、NB-IoT等LPWAN技术预研工作规划"><a href="#LoRa、NB-IoT等LPWAN技术预研工作规划" class="headerlink" title="LoRa、NB-IoT等LPWAN技术预研工作规划"></a>LoRa、NB-IoT等LPWAN技术预研工作规划</h2><p>国内LPWAN技术推广力度较大的主要是LoRa和NB-IoT，其中LoRa又以中兴主导的CLAA联盟覆盖范围更广，NB-IoT则是以华为、中兴及三大运营商推动为主，我们结合这两种技术和汉威实际业务把预研工作分为三个阶段，第一段阶主要做LoRa、NB-IoT相关模组测试选型及厂家技术交流，筛选出支持力度高，对接价值较大对厂商，包括中兴、华为、门思科技、ZETA、大普、唯传科技、利尔达等。第二阶段将筛选出的LoRa模组进行实际应用移植和测试，整合汉威无线终端产品，并探索规模部署的可行性及方式。第三阶段基于第二阶段的测试验证效果结合LoRa、NB-IoT发展趋势制定规模部署方案。</p>
+<h2 id="LoRa、NB-IoT第一阶段说明"><a href="#LoRa、NB-IoT第一阶段说明" class="headerlink" title="LoRa、NB-IoT第一阶段说明"></a>LoRa、NB-IoT第一阶段说明</h2><p>第一阶段在9月份以前已经完成，其中门思科技、大普等为标准LoRaWAN，ZETA为基于LoRa的私有定制协议，中兴则是仅提供CLAA标准的基站，利尔达模组支持CLAA标准和标准LoRa WAN，此外还有台湾群登的sip单片LoRa解决方案芯片，综合汉威作为中兴CLAA联盟成员之一，以及各个厂家模组测试结果，最后选用利尔达模组、和中兴进行了联合调试。NB-IoT由于仅有华为和中兴具备芯片和模组能力，且没有测试网络环境，因此未在第一阶段做测试选型。</p>
+<h2 id="第二阶段实际应用对接测试说明"><a href="#第二阶段实际应用对接测试说明" class="headerlink" title="第二阶段实际应用对接测试说明"></a>第二阶段实际应用对接测试说明</h2><h3 id="LoRa技术对接说明"><a href="#LoRa技术对接说明" class="headerlink" title="LoRa技术对接说明"></a>LoRa技术对接说明</h3><ol>
+<li>当前进展说明：汉威电子目前所用LoRa主要基于由中兴主导的CLAA联盟标准，汉威也是最早一批联调成功的企业。联调通过的设备有大气二代、扬尘二代、家报GKII，其中大气监测设备硬件部分由开发一部产品拓展组负责改造对接，平台软件由雪城提供对接支持，并于9月底完成业务平台对接，已具备从GPRS向LoRa通讯方式迁移的技术条件。目前基于LoRa的大气设备已在中兴的相关合作项目中落地试用，并且已联系智慧安全事业部、雪城软件等跟进商务对接，已有小批订单；家报GKII硬件部分由开发一部家报组负责改造对接，后家报组整体并入畅威物联网，联合畅威软件平台进行了业务平台对接，目前样机试用情况良好。</li>
+<li>LoRa平台选择：LoRa技术本身具有核心网的概念，其核心和难点在于网络优化工作，前期验证测试了门思科技、纵行科技、大普通信等厂商提供的模块、网关等硬件，这些厂商的模组尽管都宣称是标准LoRa WAN，但是技术能力参差不齐，模组测试效果远远达不到预期，并且这些厂商的server端开发能力有限，虽然可以开放server软件，但是我们来做二次开发的话投入成本也很高。最终选择中兴主导的CLAA联盟标准做技术对接，一是考虑中兴在通讯领域的技术优势可以很好的应用在LoRa核心网的建设当中，后期网络优化也有一定保证，参与厂商众多，协同效应可以产生较好的市场预期。二是中兴CLAA联盟所用LoRa模组和网关本身也支持标准国际LoRaWAN，可通过固件升级方式进行迁移适配。</li>
+<li>LoRa目前问题：无线网络的实际应用环境是很复杂的，我们参与了中兴在大庆油田实验局试点项目实施，提供的硬件设备是小型空气站，从现场调试情况来看，LoRa当前在实际试用过程中依旧存在较多问题—（1）依旧需要借助于3、4G移动网络或者以太网。（2）信道利用率没有优化，大庆油田试点一共不到30个设备，却出现了设备掉线，数据丢失等问题。（3）通信速率自适应功能需要完善，LoRa技术可以根据设备和网关之间的距离自适应调整传输速率，以保证传输稳定和可靠，但是实际使用达不到要求，目前仍旧是通过强制设置终端速率，对终端功耗、数据链路都有不利影响。（4）LoRa中server端是类似核心网的存在，存在运营问题，用户对这一数据通信结构有一定疑虑。</li>
+<li>LoRa相关业务建议：LoRa当前存在的问题核心在于网络优化，以及核心网络平台的运维。前者关系到LoRa技术本身的实际应用，后者关系用户对数据隐私性的要求。这就需要推广LoRa的企业具备两个方面的条件，一个是无线网络通信技术的强力支撑，一个是能够得到公认的企业背书。而中兴是具备这样的条件的，如果汉威可以结合自身业务需要联合中兴进行网络共建，将大大节省研发成本和时间，并能够更快的占据物联网通信领域的领先地位。同时也应该储备网络端的相关技术，为物联网平台建设提供通讯技术基础。<h3 id="NB-IoT技术对接说明"><a href="#NB-IoT技术对接说明" class="headerlink" title="NB-IoT技术对接说明"></a>NB-IoT技术对接说明</h3></li>
+<li>对接进展：NB-IoT由于汉威同时与中兴、华为两家公司开展合作，前期协调炜盛、化工、燃气等技术口讨论，由燃气事业部与华为进行NB-IoT模组联调的对接，基础软件研发中心负责平台对接调试，研究院负责中兴NB-IoT模组的对接及统一协调工作，。汉威与中兴、华为的NB-IoT对接均是基于电信核心网开展，由于NB-IoT技术本身不够成熟，华为、中兴技术支持力度不够，而燃气事业部研发任务饱满，没有技术人员进行调配，联调工作开展较慢，后因有项目意向，且电信施压华为、中兴加大支持力度，使得近期模组调试进度加快。目前中兴、华为均在汉威园区附近架设了NB-IoT的基站。对汉威园区进行了核心网覆盖，燃气事业部与华为的模组对接已经通过实验室测试，其业务平台也与华为IoT平台进行了相关对接，已经具备在汉威园区进行试验的条件。中兴由于模组硬件问题不能进行正常测试，目前还在协调中兴及电信相关支持。沈阳金建基础软件研发与中兴IoT云平台的对接也已联调完成。</li>
+<li>NB-IoT当前问题：该技术尚未成熟，主要推动力量是三大运营商，目前模组的性能、核心网稳定性、以及IoT平台建设都很不完善，以中兴为例，模组在10月份已经推出，并提供给我们，但是实际测试发热严重、体积大、功耗高，完全达不到使用要求，仅仅是中兴内部通过简单测试。而华为的模组虽然相对性能、体积、功耗都要好很多，但是其固件版本频繁变动，增加了很多我们的调试工作量，并且IoT平台目前还没完成，测试也只是简单的数据链接成功与否。距离落地试用还有很长一段路要走。</li>
+<li>NB-IoT业务建议：由于授权频段的原因，NB-IoT的发展和运营商推进力度有关，对于汉威来说更重要的还是尽快部署小规模的验证测试，通过实际设备结合试用，找出符合汉威业务特点的具有一定规模设备量级的应用场景。<h2 id="LoRa、NB-IoT技术现状总结"><a href="#LoRa、NB-IoT技术现状总结" class="headerlink" title="LoRa、NB-IoT技术现状总结"></a>LoRa、NB-IoT技术现状总结</h2>目前汉威内部已有大气设备、家报、燃气相关设备具备规模部署验证条件，威果相关智能硬件及工业报警器还在规划测试当中，其中大气设备已在具体项目中运行。当前园区内已覆盖LoRa核心网，中兴NB-IoT核心网、华为NB-IoT核心网，LoRa模组可批量供应，NB模组还在协调中，下一步计划将现有具备LoRa、NB-IoT改造条件的终端整合起来，结合畅威物联、雪城软件、智慧安全等部门在园区部署小规模试点作为示范应用展示，为公司业务口提供方案素材、技术展示和应用展示环境，并为下一阶段规模推广应用做准备。</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="lunring wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎扫描二维码关注我的公众号，虽然暂时并没有什么内容！</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/08/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/29/2016-12-29关于lora工作的阶段汇报和反思/"
+           data-title="" data-url="http://lincong.cc/2016/12/29/2016-12-29关于lora工作的阶段汇报和反思/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xsxrc.com1.z0.glb.clouddn.com/avatar.png"
+               alt="lunring" />
+          <p class="site-author-name" itemprop="name">lunring</p>
+          <p class="site-description motion-element" itemprop="description">Life‘hard,play.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lunring" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/lunring" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoRa、NB-IoT阶段工作汇报"><span class="nav-number">1.</span> <span class="nav-text">LoRa、NB-IoT阶段工作汇报</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LoRa、NB-IoT等LPWAN技术预研工作规划"><span class="nav-number">2.</span> <span class="nav-text">LoRa、NB-IoT等LPWAN技术预研工作规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LoRa、NB-IoT第一阶段说明"><span class="nav-number">3.</span> <span class="nav-text">LoRa、NB-IoT第一阶段说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二阶段实际应用对接测试说明"><span class="nav-number">4.</span> <span class="nav-text">第二阶段实际应用对接测试说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LoRa技术对接说明"><span class="nav-number">4.1.</span> <span class="nav-text">LoRa技术对接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NB-IoT技术对接说明"><span class="nav-number">4.2.</span> <span class="nav-text">NB-IoT技术对接说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LoRa、NB-IoT技术现状总结"><span class="nav-number">5.</span> <span class="nav-text">LoRa、NB-IoT技术现状总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lunring</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lunring"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
