@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown → 公众号排版</title>
+<link rel="stylesheet" href="ui.css">
+<link id="code-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+</head>
+<body>
+<header class="toolbar">
+  <div class="brand">
+    <span class="logo">MD</span>
+    <span>公众号排版工具</span>
+  </div>
+  <div class="controls">
+    <label>主题
+      <select id="theme">
+        <option value="default">默认绿</option>
+        <option value="elegant">优雅黑</option>
+        <option value="orange">暖橙</option>
+      </select>
+    </label>
+    <label>代码
+      <select id="codeStyle">
+        <option value="atom-one-light">atom-one-light</option>
+        <option value="github">github</option>
+        <option value="vs2015">vs2015</option>
+        <option value="monokai">monokai</option>
+      </select>
+    </label>
+    <label>主色
+      <input type="color" id="primary" value="#1aad19">
+    </label>
+    <label>字号
+      <select id="fontSize">
+        <option value="14px">14</option>
+        <option value="15px" selected>15</option>
+        <option value="16px">16</option>
+        <option value="17px">17</option>
+      </select>
+    </label>
+    <button id="sample" class="btn btn-ghost">示例</button>
+    <button id="clear" class="btn btn-ghost">清空</button>
+    <button id="copy" class="btn btn-primary">复制到公众号</button>
+  </div>
+</header>
+<main class="split">
+  <section class="pane">
+    <div class="pane-header">Markdown</div>
+    <textarea id="editor" spellcheck="false" placeholder="在此粘贴或撰写 Markdown …"></textarea>
+  </section>
+  <section class="pane preview-pane">
+    <div class="pane-header">预览</div>
+    <div class="preview-scroll">
+      <section id="preview" class="wechat-body"></section>
+    </div>
+  </section>
+</main>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

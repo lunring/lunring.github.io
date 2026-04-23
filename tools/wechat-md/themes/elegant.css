@@ -1,0 +1,135 @@
+/* 优雅黑 - 衬线风格、克制 */
+.wechat-body {
+  font-family: Georgia, "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #2c2c2c;
+  letter-spacing: 0.04em;
+  word-break: break-word;
+}
+.wechat-body h1, .wechat-body h2, .wechat-body h3,
+.wechat-body h4, .wechat-body h5, .wechat-body h6 {
+  margin: 1.6em 0 0.8em;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.4;
+  font-family: inherit;
+}
+.wechat-body h1 {
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+.wechat-body h1::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--primary, #222);
+  margin: 12px auto 0;
+}
+.wechat-body h2 {
+  font-size: 20px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ddd;
+}
+.wechat-body h3 {
+  font-size: 17px;
+  color: var(--primary, #222);
+}
+.wechat-body h3::before {
+  content: "§ ";
+  color: #888;
+}
+.wechat-body h4 { font-size: 16px; }
+.wechat-body h5 { font-size: 15px; color: #666; }
+.wechat-body h6 { font-size: 14px; color: #888; }
+
+.wechat-body p {
+  margin: 1.1em 0;
+  text-indent: 2em;
+}
+.wechat-body strong { font-weight: 700; color: #000; }
+.wechat-body em { font-style: italic; color: #555; }
+.wechat-body del { color: #999; }
+
+.wechat-body a {
+  color: var(--primary, #222);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--primary, #222);
+}
+
+.wechat-body blockquote {
+  margin: 1.4em 0;
+  padding: 8px 20px;
+  border-left: 3px solid #222;
+  color: #666;
+  font-style: italic;
+  background: transparent;
+}
+.wechat-body blockquote p { margin: 0.4em 0; text-indent: 0; }
+
+.wechat-body ul, .wechat-body ol {
+  margin: 1em 0;
+  padding-left: 1.8em;
+}
+.wechat-body li { margin: 0.4em 0; }
+.wechat-body li p { text-indent: 0; margin: 0.2em 0; }
+
+.wechat-body code {
+  padding: 2px 6px;
+  font-size: 0.9em;
+  background: #f0f0f0;
+  color: #c7254e;
+  border-radius: 2px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+}
+.wechat-body pre {
+  margin: 1.2em 0;
+  padding: 18px;
+  background: #282c34;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #abb2bf;
+}
+.wechat-body pre code {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+}
+
+.wechat-body img {
+  max-width: 100%;
+  display: block;
+  margin: 1.2em auto;
+}
+
+.wechat-body hr {
+  border: none;
+  text-align: center;
+  margin: 2em 0;
+}
+.wechat-body hr::before {
+  content: "· · ·";
+  color: #999;
+  letter-spacing: 0.8em;
+}
+
+.wechat-body table {
+  width: 100%;
+  margin: 1.2em 0;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.wechat-body th, .wechat-body td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+.wechat-body th {
+  border-bottom: 2px solid #222;
+  font-weight: 700;
+}
