@@ -1,0 +1,125 @@
+/* 默认绿 - 参考公众号常见排版 */
+.wechat-body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #3f3f3f;
+  letter-spacing: 0.05em;
+  word-break: break-word;
+}
+.wechat-body h1, .wechat-body h2, .wechat-body h3,
+.wechat-body h4, .wechat-body h5, .wechat-body h6 {
+  margin: 1.4em 0 0.8em;
+  font-weight: 700;
+  color: #2f2f2f;
+  line-height: 1.4;
+}
+.wechat-body h1 {
+  font-size: 22px;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary, #1aad19);
+}
+.wechat-body h2 {
+  font-size: 19px;
+  padding: 4px 12px;
+  color: #fff;
+  background: var(--primary, #1aad19);
+  border-radius: 4px;
+  display: inline-block;
+}
+.wechat-body h3 {
+  font-size: 17px;
+  padding-left: 10px;
+  border-left: 4px solid var(--primary, #1aad19);
+}
+.wechat-body h4 { font-size: 16px; color: var(--primary, #1aad19); }
+.wechat-body h5 { font-size: 15px; }
+.wechat-body h6 { font-size: 14px; color: #888; }
+
+.wechat-body p {
+  margin: 1em 0;
+  line-height: 1.75;
+}
+.wechat-body strong { color: var(--primary, #1aad19); font-weight: 700; }
+.wechat-body em { color: #555; font-style: italic; }
+.wechat-body del { color: #999; }
+
+.wechat-body a {
+  color: var(--primary, #1aad19);
+  text-decoration: none;
+  border-bottom: 1px solid var(--primary, #1aad19);
+}
+
+.wechat-body blockquote {
+  margin: 1em 0;
+  padding: 12px 16px;
+  background: #f7f7f7;
+  border-left: 4px solid var(--primary, #1aad19);
+  color: #555;
+  border-radius: 0 4px 4px 0;
+}
+.wechat-body blockquote p { margin: 0; }
+
+.wechat-body ul, .wechat-body ol {
+  margin: 1em 0;
+  padding-left: 1.6em;
+}
+.wechat-body li { margin: 0.4em 0; }
+.wechat-body ul li::marker { color: var(--primary, #1aad19); }
+
+.wechat-body code {
+  padding: 2px 6px;
+  margin: 0 2px;
+  font-size: 0.9em;
+  background: #f3f4f6;
+  color: #c7254e;
+  border-radius: 3px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+}
+.wechat-body pre {
+  margin: 1em 0;
+  padding: 16px;
+  background: #f6f8fa;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.wechat-body pre code {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: #333;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+.wechat-body img {
+  max-width: 100%;
+  display: block;
+  margin: 1em auto;
+  border-radius: 4px;
+}
+
+.wechat-body hr {
+  border: none;
+  border-top: 1px dashed #ccc;
+  margin: 2em 0;
+}
+
+.wechat-body table {
+  width: 100%;
+  margin: 1em 0;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.wechat-body th, .wechat-body td {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+.wechat-body th {
+  background: #f7f7f7;
+  font-weight: 600;
+}
