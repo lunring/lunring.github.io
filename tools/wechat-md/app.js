@@ -233,8 +233,9 @@
       const svg = srcEl.querySelector('svg');
       if (!svg) continue;
       const isDisplay = srcEl.getAttribute('display') === 'true' || cloneEl.getAttribute('display') === 'true';
-      const cs = window.getComputedStyle(srcEl);
-      const verticalAlign = cs.getPropertyValue('vertical-align');
+      const svgInlineStyle = svg.getAttribute('style') || '';
+      const vaMatch = svgInlineStyle.match(/vertical-align\s*:\s*(-?[\d.]+(?:ex|em|px|%))/i);
+      const verticalAlign = vaMatch ? vaMatch[1] : null;
       try {
         const { dataUrl, width, height } = await svgToPngDataUrl(svg, 2);
         const img = document.createElement('img');
@@ -245,7 +246,7 @@
           style = `display:block;margin:1em auto;max-width:100%;width:${width}px;height:auto;`;
         } else {
           style = `display:inline-block;width:${width}px;height:${height}px;`;
-          if (verticalAlign && verticalAlign !== 'baseline' && verticalAlign !== '0px') {
+          if (verticalAlign) {
             style += `vertical-align:${verticalAlign};`;
           }
         }
