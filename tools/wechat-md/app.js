@@ -34,6 +34,39 @@
     }
   });
 
+  const MATH_PLACEHOLDER_PREFIX = 'MJXPH';
+  const MATH_PLACEHOLDER_SUFFIX = 'PHEND';
+  const MATH_PLACEHOLDER_RE = new RegExp(MATH_PLACEHOLDER_PREFIX + '(\\d+)' + MATH_PLACEHOLDER_SUFFIX, 'g');
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function stashMath(text) {
+    const blocks = [];
+    text = text.replace(/\$\$([\s\S]+?)\$\$/g, (m) => {
+      const i = blocks.push(m) - 1;
+      return MATH_PLACEHOLDER_PREFIX + i + MATH_PLACEHOLDER_SUFFIX;
+    });
+    text = text.replace(/(?<![\\$])\$(?![\s\d$])((?:[^$\n\\]|\\.)+?)(?<![\s$])\$(?!\d)/g, (m) => {
+      const i = blocks.push(m) - 1;
+      return MATH_PLACEHOLDER_PREFIX + i + MATH_PLACEHOLDER_SUFFIX;
+    });
+    text = text.replace(/\\\[([\s\S]+?)\\\]/g, (m) => {
+      const i = blocks.push(m) - 1;
+      return MATH_PLACEHOLDER_PREFIX + i + MATH_PLACEHOLDER_SUFFIX;
+    });
+    text = text.replace(/\\\(([\s\S]+?)\\\)/g, (m) => {
+      const i = blocks.push(m) - 1;
+      return MATH_PLACEHOLDER_PREFIX + i + MATH_PLACEHOLDER_SUFFIX;
+    });
+    return { text, blocks };
+  }
+
+  function restoreMath(html, blocks) {
+    return html.replace(MATH_PLACEHOLDER_RE, (_, i) => escapeHtml(blocks[+i]));
+  }
+
   let themeLinkEl = null;
   function loadTheme(name) {
     if (themeLinkEl) themeLinkEl.remove();
@@ -54,9 +87,22 @@
     preview.style.setProperty('font-size', size);
   }
 
+  let mathQueue = Promise.resolve();
+  function typesetMath() {
+    if (!window.MathJax || !MathJax.typesetPromise) return Promise.resolve();
+    mathQueue = mathQueue
+      .then(() => MathJax.typesetClear && MathJax.typesetClear([preview]))
+      .then(() => MathJax.typesetPromise([preview]))
+      .catch(err => console.error('MathJax typeset error:', err));
+    return mathQueue;
+  }
+
   function render() {
     const text = editor.value;
-    preview.innerHTML = md.render(text);
+    const { text: stashed, blocks } = stashMath(text);
+    let html = md.render(stashed);
+    html = restoreMath(html, blocks);
+    preview.innerHTML = html;
     if (window.hljs) {
       preview.querySelectorAll('pre code').forEach(block => {
         if (!block.dataset.highlighted) {
@@ -65,6 +111,7 @@
         }
       });
     }
+    typesetMath();
     localStorage.setItem(STORAGE_KEY, text);
   }
 
@@ -128,9 +175,76 @@
     targetRoot.querySelectorAll('[class]').forEach(el => el.removeAttribute('class'));
   }
 
-  function buildInlinedHTML() {
+  function svgToPngDataUrl(svgEl, scale) {
+    return new Promise((resolve, reject) => {
+      const cloned = svgEl.cloneNode(true);
+      if (!cloned.getAttribute('xmlns')) {
+        cloned.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      }
+      const rect = svgEl.getBoundingClientRect();
+      const cssW = rect.width || parseFloat(svgEl.getAttribute('width')) || 0;
+      const cssH = rect.height || parseFloat(svgEl.getAttribute('height')) || 0;
+      if (!cssW || !cssH) { reject(new Error('zero-size svg')); return; }
+      cloned.setAttribute('width', cssW);
+      cloned.setAttribute('height', cssH);
+      const xml = new XMLSerializer().serializeToString(cloned);
+      const b64 = btoa(unescape(encodeURIComponent(xml)));
+      const dataUri = 'data:image/svg+xml;base64,' + b64;
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.ceil(cssW * scale);
+        canvas.height = Math.ceil(cssH * scale);
+        const ctx = canvas.getContext('2d');
+        ctx.scale(scale, scale);
+        ctx.drawImage(img, 0, 0, cssW, cssH);
+        try {
+          resolve({ dataUrl: canvas.toDataURL('image/png'), width: cssW, height: cssH });
+        } catch (e) { reject(e); }
+      };
+      img.onerror = (e) => reject(e);
+      img.src = dataUri;
+    });
+  }
+
+  async function convertMathToImages(root, sourceRoot) {
+    const cloneContainers = root.querySelectorAll('mjx-container');
+    const sourceContainers = sourceRoot.querySelectorAll('mjx-container');
+    for (let i = 0; i < cloneContainers.length; i++) {
+      const cloneEl = cloneContainers[i];
+      const srcEl = sourceContainers[i];
+      if (!srcEl) continue;
+      const svg = srcEl.querySelector('svg');
+      if (!svg) continue;
+      const isDisplay = srcEl.getAttribute('display') === 'true' || cloneEl.getAttribute('display') === 'true';
+      const cs = window.getComputedStyle(srcEl);
+      const verticalAlign = cs.getPropertyValue('vertical-align');
+      try {
+        const { dataUrl, width, height } = await svgToPngDataUrl(svg, 2);
+        const img = document.createElement('img');
+        img.src = dataUrl;
+        img.alt = srcEl.getAttribute('aria-label') || 'formula';
+        let style = '';
+        if (isDisplay) {
+          style = `display:block;margin:1em auto;max-width:100%;width:${width}px;height:auto;`;
+        } else {
+          style = `display:inline-block;width:${width}px;height:${height}px;`;
+          if (verticalAlign && verticalAlign !== 'baseline' && verticalAlign !== '0px') {
+            style += `vertical-align:${verticalAlign};`;
+          }
+        }
+        img.setAttribute('style', style);
+        cloneEl.parentNode.replaceChild(img, cloneEl);
+      } catch (e) {
+        console.error('formula image conversion failed:', e);
+      }
+    }
+  }
+
+  async function buildInlinedHTML() {
     const clone = preview.cloneNode(true);
     inlineTree(preview, clone);
+    await convertMathToImages(clone, preview);
     return clone.outerHTML;
   }
 
@@ -139,7 +253,8 @@
       showToast('内容为空');
       return;
     }
-    const html = buildInlinedHTML();
+    await mathQueue;
+    const html = await buildInlinedHTML();
     try {
       if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
         const plain = preview.innerText;
@@ -231,6 +346,34 @@ greet('公众号');
 | Hexo | 静态 | 插件丰富 |
 | Hugo | 静态 | 构建最快 |
 | Astro | 静态 | 组件化 |
+
+### 数学公式
+
+行内公式：质能方程 $E = mc^2$，欧拉恒等式 $e^{i\\pi} + 1 = 0$。
+
+块级公式：
+
+$$
+\\int_{-\\infty}^{+\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}
+$$
+
+$$
+\\frac{\\partial}{\\partial t}\\Psi = -\\frac{\\hbar^2}{2m}\\nabla^2\\Psi + V\\Psi
+$$
+
+### 化学方程式
+
+行内：水的分子式 $\\ce{H2O}$，硫酸 $\\ce{H2SO4}$。
+
+块级反应方程：
+
+$$
+\\ce{2H2 + O2 -> 2H2O}
+$$
+
+$$
+\\ce{CO2 + H2O <=> H2CO3 <=> H+ + HCO3^-}
+$$
 
 ### 分隔线
 
