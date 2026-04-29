@@ -135,6 +135,19 @@
     return Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join('; ');
   }
 
+  const ROOT_DROP_PROPS = new Set([
+    'width', 'max-width', 'height',
+    'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+    'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+    'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
+    'border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style',
+    'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color',
+    'border-top-left-radius', 'border-top-right-radius',
+    'border-bottom-left-radius', 'border-bottom-right-radius',
+    'background-color', 'background-image',
+    'display', 'position', 'overflow-x'
+  ]);
+
   function collectStyle(cs) {
     const out = {};
     for (const prop of COPY_PROPS) {
@@ -155,6 +168,9 @@
       if (!tgt) continue;
       const cs = window.getComputedStyle(src);
       const styleMap = collectStyle(cs);
+      if (i === 0) {
+        for (const k of ROOT_DROP_PROPS) delete styleMap[k];
+      }
       tgt.setAttribute('style', styleObjectToString(styleMap));
 
       ['::before', '::after'].forEach(pseudo => {
@@ -237,6 +253,10 @@
         cloneEl.parentNode.replaceChild(img, cloneEl);
       } catch (e) {
         console.error('formula image conversion failed:', e);
+        const fallback = document.createElement('span');
+        fallback.textContent = srcEl.getAttribute('aria-label') || '[公式]';
+        fallback.setAttribute('style', 'color:#c00;font-family:monospace;');
+        cloneEl.parentNode.replaceChild(fallback, cloneEl);
       }
     }
   }
